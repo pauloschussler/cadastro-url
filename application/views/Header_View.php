@@ -6,17 +6,19 @@
             <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3SupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-3">
-                        <a class="nav-link text-light" href="#"><b>PINGENDO</b></a>
+                        <a class="nav-link text-light" href="<?= base_url('Index') ?>"><b class="navbar_text">Home</b></a>
+                    </li>
+                    <!-- <li class="nav-item mx-2">
+                        <a class="nav-link" href="<?= base_url('Usuario') ?>"><b class="navbar_text">Usuários</b></a>
+                    </li> -->
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="<?= base_url('Url/visualizarUrl') ?>"><b class="navbar_text">Visualizar URLs</b></a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="#menu"><b>MENU</b></a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="#venue"><b>VENUE</b></a>
+                        <a class="nav-link" href="<?= base_url('Url/cadastraUrl') ?>"><b class="navbar_text">Cadastrar URLs</b></a>
                     </li>
                 </ul>
-                <a class="btn navbar-btn btn-secondary mx-2" href="#book"><b>BOOK</b></a>
             </div>
-            <a class="btn btn-outline-light font-weight-bold"  href="<?= base_url('Login/Logout') ?>">LOGOUT</a>
+            <a class="btn btn-outline-light font-weight-bold" href="<?= base_url('Login/Logout') ?>">LOGOUT</a>
         </div>
     </nav>

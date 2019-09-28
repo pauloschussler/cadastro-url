@@ -12,7 +12,13 @@ class Index extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('Import_View');
-		$this->load->view('Header_View');
+		if (!$_SESSION['active']) {
+			redirect('Login');
+		} else {
+			
+			$this->load->view('Import_View');
+			$this->load->view('Header_View');
+			$this->load->view('Menu_View');
+		}
 	}
 }

@@ -10,13 +10,13 @@
                     <div class="py-3 col-11 mx-auto">
                         <form method="POST" action="<?= base_url('Login/verificaLogin'); ?>">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Endereço de e-mail" id="email" name="email" required>
+                                <input type="email" class="form-control font-weight-bold" placeholder="Endereço de e-mail" id="email" name="email" required>
                             </div>
                             <div class="form-group mb-3">
-                                <input type="password" class="form-control" placeholder="Senha" id="senha" name="senha" required>
+                                <input type="password" class="form-control font-weight-bold" placeholder="Senha" id="senha" name="senha" required>
                             </div>
                             <div class="form-group mb-3 py-2">
-                                <button type="submit" class="btn btn-primary float-right font-weight-bold">Entrar</button>
+                                <button type="submit" class="btn btn-dark float-right font-weight-bold">Entrar</button>
                             </div>
                         </form>
                     </div>

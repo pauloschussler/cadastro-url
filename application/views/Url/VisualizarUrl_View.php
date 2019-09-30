@@ -24,7 +24,7 @@
                             <td><?php if ($url->statuscode != null) {
                                         echo $url->statuscode;
                                     } else {
-                                        echo '';
+                                        echo 'Não processado';
                                     }  ?></td>
                             <td class="text-center"><?php if (($url->requisicaostatus) == true) { ?>
                                     <button type="button" title="Visualizar dados" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#modal<?= $url->idurl ?>">
@@ -238,6 +238,7 @@
 <script>
     function Inicio() {
 
+
         var table = document.getElementById('tableUrls');
         var conteudo = '';
         table.innerHTML = conteudo;
@@ -253,19 +254,24 @@
 
     function timeOutFunction() {
 
-        setTimeout(Inicio, 30000);
+        setTimeout(Inicio, 10000);
     }
 
     function geraHtml(result, index) {
 
 
         var conteudo = '<tr>';
-        conteudo = conteudo + '<td>' + result.url + '</td> <td>' + result.data + '</td><td><?= $url->horacadastro ?></td>';
-        conteudo = conteudo + '<td>' + result.statuscode + '</td> <td class="text-center">';
+        conteudo = conteudo + '<td>' + result.url + '</td> <td>' + result.datacadastro + '</td><td>' + result.horacadastro + '</td>';
+        if (result.statuscode != null) {
+            conteudo = conteudo + '<td>' + result.statuscode;
+        } else {
+            conteudo = conteudo + '<td>' + '<b>Não processado</b>';
+        }
+        conteudo = conteudo + '</td> <td class="text-center">';
         if (result.requisicaostatus == '1') {
-            conteudo = conteudo + '<button type="button" title="Visualizar dados" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#modal' + result.url + '">';
+            conteudo = conteudo + '<button type="button" title="Visualizar dados" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#modal' + result.idurl + '">';
             conteudo = conteudo + '<i class="fas fa-search"></i></button>';
-            conteudo = conteudo + '<div class="modal fade bd-example-modal-lg" id="modal' + result.url + '"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+            conteudo = conteudo + '<div class="modal fade bd-example-modal-lg" id="modal' + result.idurl + '"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
             conteudo = conteudo + '<div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header">';
             conteudo = conteudo + '<h4 class="modal-title mx-auto font-weight-bold" id="exampleModalLabel">Informações referentes a URL:</h4>';
             conteudo = conteudo + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>';
@@ -274,7 +280,7 @@
             conteudo = conteudo + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button></div></div></div>';
             conteudo = conteudo + '</div>';
         } else {
-            conteudo = conteudo + 'Não precessado </td>'
+            conteudo = conteudo + '<b>Não precessado</b> </td>'
         }
         conteudo = conteudo + '</tr>';
 

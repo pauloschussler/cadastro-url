@@ -9,18 +9,61 @@
                     <tr>
                         <th scope="col">URL</th>
                         <th scope="col">Data</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Opções</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">StatusCode</th>
+                        <th scope="col">Informações</th>
 
                     </tr>
                 </thead>
-                <tbody id="myTable">
+                <tbody id="tableUrls">
                     <?php foreach ($urls as $url) { ?>
-                        <tr>
+                        <tr id="dataTable">
                             <td><?= $url->url ?></td>
                             <td><?= $url->datacadastro ?></td>
                             <td><?= $url->horacadastro ?></td>
-                            <td>opcoes</td>
+                            <td><?php if ($url->statuscode != null) {
+                                        echo $url->statuscode;
+                                    } else {
+                                        echo '';
+                                    }  ?></td>
+                            <td class="text-center"><?php if (($url->requisicaostatus) == true) { ?>
+                                    <button type="button" title="Visualizar dados" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#modal<?= $url->idurl ?>">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade bd-example-modal-lg" id="modal<?= $url->idurl ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title mx-auto font-weight-bold" id="exampleModalLabel">Informações referentes a URL:</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row border-bottom py-3">
+                                                        <div class="col-12 text-left">
+                                                            <?php
+                                                                    $data =  json_decode($url->conteudo);
+                                                                    print_r($data);
+                                                                    ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                <?php
+                                    } else {
+                                        echo 'Não precessado';
+                                    } ?>
+                            </td>
 
                         </tr>
                     <?php } ?>
@@ -190,4 +233,52 @@
             });
         });
     });
+</script>
+
+<script>
+    function Inicio() {
+
+        var table = document.getElementById('tableUrls');
+        var conteudo = '';
+        table.innerHTML = conteudo;
+
+
+        $.getJSON('http://localhost/cadastro-url/Url/getUrls', function(result) {
+            console.log(result);
+            result.forEach(geraHtml);
+        });
+
+        timeOutFunction();
+    }
+
+    function timeOutFunction() {
+
+        setTimeout(Inicio, 30000);
+    }
+
+    function geraHtml(result, index) {
+
+
+        var conteudo = '<tr>';
+        conteudo = conteudo + '<td>' + result.url + '</td> <td>' + result.data + '</td><td><?= $url->horacadastro ?></td>';
+        conteudo = conteudo + '<td>' + result.statuscode + '</td> <td class="text-center">';
+        if (result.requisicaostatus == '1') {
+            conteudo = conteudo + '<button type="button" title="Visualizar dados" class="btn btn-outline-primary font-weight-bold" data-toggle="modal" data-target="#modal' + result.url + '">';
+            conteudo = conteudo + '<i class="fas fa-search"></i></button>';
+            conteudo = conteudo + '<div class="modal fade bd-example-modal-lg" id="modal' + result.url + '"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+            conteudo = conteudo + '<div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header">';
+            conteudo = conteudo + '<h4 class="modal-title mx-auto font-weight-bold" id="exampleModalLabel">Informações referentes a URL:</h4>';
+            conteudo = conteudo + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>';
+            conteudo = conteudo + '</button></div><div class="modal-body"><div class="row border-bottom py-3"><div class="col-12 text-left">';
+            conteudo = conteudo + result.conteudo + '</div></div></div><div class="modal-footer">';
+            conteudo = conteudo + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button></div></div></div>';
+            conteudo = conteudo + '</div>';
+        } else {
+            conteudo = conteudo + 'Não precessado </td>'
+        }
+        conteudo = conteudo + '</tr>';
+
+        $('#tableUrls').append(conteudo);
+
+    }
 </script>

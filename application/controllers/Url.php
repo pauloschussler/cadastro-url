@@ -36,8 +36,10 @@ class Url extends CI_Controller
                 $dados = null;
             }
 
+            $dados['navbar'] = 3;
+
             $this->load->view('Import_View');
-            $this->load->view('Header_View');
+            $this->load->view('Header_View', $dados);
             $this->load->view('Url/CadastraUrl_View', $dados);
         }
     }
@@ -72,6 +74,17 @@ class Url extends CI_Controller
             $this->load->model('Url_Model');
 
             if ($this->Url_Model->cadastraUrl($url)) {
+
+                // create a new cURL resource
+                $ch = curl_init();
+                // set URL and other appropriate options
+                curl_setopt($ch, CURLOPT_URL, "http://localhost/sistema-url/");
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                // grab URL and pass it to the browser
+                curl_exec($ch);
+                // close cURL resource, and free up system resources
+                curl_close($ch);
+
                 redirect('Url/cadastraUrl?resposta=1');
             } else {
                 redirect('Url/cadastraUrl?resposta=2');
@@ -96,11 +109,22 @@ class Url extends CI_Controller
 
                 $i++;
             }
+			$dados['navbar'] = 2;
 
             $dados['urls'] = $urls;
+
+            
+            $this->load->view('JavaScript_View');
             $this->load->view('Import_View');
-            $this->load->view('Header_View');
+            $this->load->view('Header_View', $dados);
             $this->load->view('Url/VisualizarUrl_View', $dados);
         }
+    }
+
+    public function getUrls(){
+        $this->load->model('Url_Model');
+        $dados = $this->Url_Model->getUrls();
+
+        echo json_encode($dados);
     }
 }

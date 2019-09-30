@@ -15,9 +15,11 @@ class Index extends CI_Controller
 		if (!$_SESSION['active']) {
 			redirect('Login');
 		} else {
+
+			$dados['navbar'] = 1;
 			
 			$this->load->view('Import_View');
-			$this->load->view('Header_View');
+			$this->load->view('Header_View', $dados);
 			$this->load->view('Menu_View');
 		}
 	}

@@ -1,4 +1,4 @@
-<body>
+<body onload="Inicio()">
     <!-- Navbar -->
     <nav class="navbar-expand-md navbar-dark bg-dark navbar fixed-top">
         <div class="container">
@@ -6,16 +6,22 @@
             <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3SupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-3">
-                        <a class="nav-link text-light" href="<?= base_url('Index') ?>"><b class="navbar_text">Home</b></a>
+                        <a class="nav-link <?php if ($navbar == 1) {
+                                                echo 'text-light';
+                                            } ?>" href="<?= base_url('Index') ?>"><b class="navbar_text">Home</b></a>
                     </li>
                     <!-- <li class="nav-item mx-2">
                         <a class="nav-link" href="<?= base_url('Usuario') ?>"><b class="navbar_text">Usuários</b></a>
                     </li> -->
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="<?= base_url('Url/visualizarUrl') ?>"><b class="navbar_text">Visualizar URLs</b></a>
+                        <a class="nav-link <?php if ($navbar == 2) {
+                                                echo 'text-light';
+                                            } ?>" href="<?= base_url('Url/visualizarUrl') ?>"><b class="navbar_text">Visualizar URLs</b></a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="<?= base_url('Url/cadastraUrl') ?>"><b class="navbar_text">Cadastrar URLs</b></a>
+                        <a class="nav-link <?php if ($navbar == 3) {
+                                                echo 'text-light';
+                                            } ?>" href="<?= base_url('Url/cadastraUrl') ?>"><b class="navbar_text">Cadastrar URLs</b></a>
                     </li>
                 </ul>
             </div>

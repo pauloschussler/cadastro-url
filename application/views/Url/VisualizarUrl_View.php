@@ -244,7 +244,7 @@
         table.innerHTML = conteudo;
 
 
-        $.getJSON('<?= base_url('Url/getUrls')?>', function(result) {
+        $.getJSON('<?= base_url('Url/getUrls') ?>', function(result) {
             console.log(result);
             result.forEach(geraHtml);
         });
@@ -276,7 +276,11 @@
             conteudo = conteudo + '<h4 class="modal-title mx-auto font-weight-bold" id="exampleModalLabel">Informações referentes a URL:</h4>';
             conteudo = conteudo + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>';
             conteudo = conteudo + '</button></div><div class="modal-body"><div class="row border-bottom py-3"><div class="col-12 text-left">';
-            conteudo = conteudo + result.conteudo + '</div></div></div><div class="modal-footer">';
+            if (result.conteudo != '0' || result.conteudo != null) {
+                conteudo = conteudo + result.conteudo + '</div></div></div><div class="modal-footer">';
+            } else {
+                conteudo = conteudo + 'Erro </div></div></div><div class="modal-footer">';
+            }
             conteudo = conteudo + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button></div></div></div>';
             conteudo = conteudo + '</div>';
         } else {

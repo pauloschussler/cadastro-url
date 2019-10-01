@@ -244,7 +244,7 @@
         table.innerHTML = conteudo;
 
 
-        $.getJSON('http://localhost/cadastro-url/Url/getUrls', function(result) {
+        $.getJSON('<?= base_url('Url/getUrls')?>', function(result) {
             console.log(result);
             result.forEach(geraHtml);
         });

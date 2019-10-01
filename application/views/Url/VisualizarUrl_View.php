@@ -254,7 +254,7 @@
 
     function timeOutFunction() {
 
-        setTimeout(Inicio, 10000);
+        setTimeout(Inicio, 30000);
     }
 
     function geraHtml(result, index) {

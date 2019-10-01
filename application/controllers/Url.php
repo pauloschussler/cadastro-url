@@ -12,7 +12,7 @@ class Url extends CI_Controller
 
     public function index()
     {
-        if (!$_SESSION['active']) {
+        if ( !isset($_SESSION['active']) || !$_SESSION['active']) {
             redirect('Login');
         } else {
             $this->load->view('Import_View');
@@ -21,7 +21,7 @@ class Url extends CI_Controller
     }
     public function cadastraUrl()
     {
-        if (!$_SESSION['active']) {
+        if ( !isset($_SESSION['active']) || !$_SESSION['active']) {
             redirect('Login');
         } else {
 
@@ -46,7 +46,7 @@ class Url extends CI_Controller
 
     public function realizaCadastroUrl()
     {
-        if (!$_SESSION['active']) {
+        if ( !isset($_SESSION['active']) || !$_SESSION['active']) {
             redirect('Login');
         } else {
 
@@ -78,7 +78,7 @@ class Url extends CI_Controller
                 // create a new cURL resource
                 $ch = curl_init();
                 // set URL and other appropriate options
-                curl_setopt($ch, CURLOPT_URL, "http://localhost/sistema-url/");
+                curl_setopt($ch, CURLOPT_URL, "https://sistemaurl.azurewebsites.net");
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 // grab URL and pass it to the browser
                 curl_exec($ch);
@@ -94,7 +94,7 @@ class Url extends CI_Controller
 
     public function visualizarUrl()
     {
-        if (!$_SESSION['active']) {
+        if ( !isset($_SESSION['active']) || !$_SESSION['active']) {
             redirect('Login');
         } else {
             $this->load->model('Url_Model');

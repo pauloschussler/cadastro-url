@@ -12,7 +12,7 @@ class Usuario extends CI_Controller
 
     public function index()
     {
-        if (!$_SESSION['active']) {
+        if ( !isset($_SESSION['active']) || !$_SESSION['active']) {
             redirect('Login');
         } else {
             $email = $_SESSION['email'];

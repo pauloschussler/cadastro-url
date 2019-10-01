@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'bancosistemaurl.mysql.database.azure.com',
+	'username' => 'pjs07@bancosistemaurl',
+	'password' => 'Sistema_url1234',
 	'database' => 'sistemaurl',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
